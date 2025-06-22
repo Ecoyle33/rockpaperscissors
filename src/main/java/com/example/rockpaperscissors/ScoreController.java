@@ -29,6 +29,25 @@ public class ScoreController {
 
     }
 
+    @PatchMapping("score/{result}")
+    public Score updateScore(@RequestParam(name="new-value") int newValue, @PathVariable String result){
+
+        if (result.equalsIgnoreCase("wins")){
+            score.setWins(newValue);
+            return score;
+        }
+        else if (result.equalsIgnoreCase("losses")){
+            score.setLosses(newValue);
+            return score;
+        }
+        else if (result.equalsIgnoreCase("ties")){
+            score.setTies(newValue);
+            return score;
+        } else {
+            return score;
+        }
+    }
+
     @GetMapping("/score")
     public Score getScore(){
         return score;

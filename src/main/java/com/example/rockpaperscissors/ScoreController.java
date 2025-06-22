@@ -2,6 +2,7 @@ package com.example.rockpaperscissors;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,18 +21,17 @@ public class ScoreController {
         return score;
     }
 
-    @GetMapping("/score/wins")
-    public int getWins(){
-        return score.getWins();
-    }
-
-    @GetMapping("/score/losses")
-    public int getLosses(){
-        return score.getLosses();
-    }
-
-    @GetMapping("/score/ties")
-    public int getTies(){
-        return score.getTies();
+    @GetMapping("/score/{winslossesorties}")
+    public int getWinsLossesOrTies(@PathVariable String winslossesorties){
+        if (winslossesorties.equalsIgnoreCase("wins")){
+            return score.getWins();
+        } else if (winslossesorties.equalsIgnoreCase("losses")) {
+            return score.getLosses();
+        } else if (winslossesorties.equalsIgnoreCase("ties")) {
+            return score.getTies();
+        }
+        else {
+            return -1;
+        }
     }
 }

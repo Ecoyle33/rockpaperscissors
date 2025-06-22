@@ -1,9 +1,6 @@
 package com.example.rockpaperscissors;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -14,6 +11,22 @@ public class ScoreController {
     @GetMapping("/health-check")
     public String getHealthCheck(){
         return "All gooooood";
+    }
+
+    @PostMapping("/score/{result}")
+    public Score increaseWins(@PathVariable String result){
+
+        if (result.equalsIgnoreCase("wins")){
+            score.setWins(score.getWins() + 1);
+            return score;
+        } else if (result.equalsIgnoreCase("losses")) {
+            score.setLosses(score.getLosses() + 1);
+            return score;
+        } else if (result.equalsIgnoreCase("ties")) {
+            score.setTies(score.getTies() + 1);
+            return score;
+        } else return score;
+
     }
 
     @GetMapping("/score")

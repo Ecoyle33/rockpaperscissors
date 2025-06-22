@@ -54,6 +54,11 @@ public class ScoreController {
         return score;
     }
 
+    @DeleteMapping("/score")
+    public void deleteScore(){
+        score = null;
+    }
+
     @GetMapping("/score")
     public Score getScore(){
         return score;
